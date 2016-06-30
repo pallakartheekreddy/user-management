@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group" ng-form="userForm">
     <h2>Add User</h2>
     <div>{{message}}</div>
     <div class="form-group">
@@ -7,21 +7,21 @@
     </div>
     <div class="form-group">
         <label for="email">Email</label>
-        <input class="form-control" type="text" name="email" id="email" ng-model="email" />
+        <input class="form-control" name="email" id="email" ng-model="email" type="email" required />
     </div>
     <div class="form-group">
         <label for="email">Age</label>
-        <input class="form-control" type="text" name="age" id="age" ng-model="age" />
+        <input class="form-control" type="number" name="age" id="age" ng-model="age" min="0" max="100" required />
     </div>
     <div class="form-group">
         <label for="gender">Gender</label>
-		<input type="radio" name="gender" value="male" checked> Male
-		<input type="radio" name="gender" value="female"> Female
-    <div class="form-group ">
+		<input type="radio" name="gender" ng-model="gender" value="male" checked> Male
+		<input type="radio" name="gender" ng-model="gender" value="female"> Female
+    <div class="form-group">
         <label for="dob">DOB</label>
-        <input class="form-control" type="text" name="dob" id="dob" ng-model="dob" />
+        <input class="form-control" id="dob" name="dob" ng-model="dob" placeholder="MM/DD/YYY" type="text"/>
     </div>
     <div class="form-group">
-		<button type="submit" class="btn btn-info" ng-click="goToAdduser()">Add User</button>
+		<button type="submit" class="btn btn-info" ng-disabled="userForm.$invalid" ng-click="goToAdduser()">Add User</button>
     </div>
 </div>

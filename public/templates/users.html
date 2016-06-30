@@ -4,14 +4,23 @@
 <tr>
 <th>Employee ID</th>
 <th>Name</th>
+<th>Email</th>
 <th>Age</th>
+<th>Gender</th>
+<th>Date Of Birth</th>
 <th>Action</th>
 </tr>
 <tr ng-repeat= "user in users">
 	<td>{{user.id}}</td>
 	<td>{{user.name}}</td>
+	<td>{{user.email}}</td>
 	<td>{{user.age}}</td>
-	<td><a href="#getuserinfo/{{user.id}}">Edit</a>  <a href="#deleteuser/{{user.id}}">Delete</a></td>
+	<td>{{user.gender}}</td>
+	<td>{{user.dob}}</td>
+	<td>
+        <a href="#getuserinfo/{{user.id}}"><button type="button" class="btn btn-info">Edit</button></a>  
+        <a href="#deleteuser/{{user.id}}"><button type="button" class="btn btn-danger">Delete</button></a>
+    </td>
 </tr>
 </table>
 </div>

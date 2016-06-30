@@ -59,8 +59,13 @@ router.post('/adduser', function(req, res) {
  * update user list
  */
 router.post('/updateuser', function(req, res) {
-	
-	db.collection('users').update({"id": parseInt(req.body.id)}, {$set: {"name": req.body.name, "age" : parseInt(req.body.age)}}, function (err, numUpdated) {
+	var user = {"name": req.body.name, 
+                 "email" : req.body.email,
+                 "age": req.body.age,
+                 "gender": req.body.gender,
+                 "dob" : req.body.dob
+                 };
+	db.collection('users').update({"id": req.body.id}, {$set: user}, function (err, numUpdated) {
 		if (err) {
 			console.log(err);
 		} else if (numUpdated) {
@@ -118,7 +123,7 @@ router.delete('/deleteuser/:id', function(req, res) {
 	var user_id = req.params.id;
     console.log(user_id);
 	//_id: ObjectID(user_id)
-	db.collection('users').remove({id: parseInt(user_id)}, function(err, result) {
+	db.collection('users').remove({id: user_id}, function(err, result) {
 		if (err) {
 			console.log(err);
 		} else if (result) {

@@ -52,14 +52,22 @@ angular.module('mean-sample',['ui.router'])
                     "gender" : $scope.gender,
                     "dob" : $scope.dob
                     };
-        $http.post('addemp', data)
+        $http.post('adduser', data)
         .success(function(data) {
            console.log('data '+data);
-           $state.go("userlist");
+		   if(data.status == 'SUCCESS'){
+				$state.go("users");
+		   }else{
+			   $scope.message = data.message;
+		   }
            //$scope.message = data.status;
            //$scope.name = $scope.age = $scope.email = $scope.gender = $scope.dob = '';
         });
     }
+    var options={
+        format: 'mm/dd/yyyy',
+    };
+    $('#dob').datepicker(options);
 })
 .controller('EditUserCtrl', function($scope, $rootScope, $http, $state, $stateParams) {
     $scope.getUserInfo = function() {
@@ -80,15 +88,19 @@ angular.module('mean-sample',['ui.router'])
         $http.post('updateuser', data)
         .success(function(data) {
            console.log('data '+data);
-           $state.go("userlist");
+           $state.go("users");
         });
     }
 	$scope.getUserInfo();
+    var options={
+        format: 'mm/dd/yyyy',
+    };
+    $('#dob').datepicker(options);
 })
 .controller('DeleteUserCtrl', function($scope, $rootScope, $http, $state, $stateParams) {
     $scope.goToDeleteuser = function() {
         $http.delete('deleteuser/'+$stateParams.userid).success(function(resp) {
-           $state.go("userlist");
+           $state.go("users");
         });
     }
     $scope.goToDeleteuser();
