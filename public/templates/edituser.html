@@ -1,0 +1,28 @@
+<div>
+    <h1>Edit User</h1>
+    <div>{{message}}</div>
+    <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" ng-model="user.name" />
+        <input type="hidden" name="id" id="id" ng-model="user.id" />
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" ng-model="user.email" />
+    </div>
+    <div>
+        <label for="email">Age</label>
+        <input type="text" name="age" id="age" ng-model="user.age" />
+    </div>
+    <div>
+        <label for="gender">Gender</label>
+        <input type="text" name="gender" id="gender" ng-model="user.gender" />
+    </div>
+    <div>
+        <label for="dob">DOB</label>
+        <input type="text" name="dob" id="dob" ng-model="user.dob" />
+    </div>
+    <div>
+    <button type="submit" ng-click="goToUpdateuser(user)">Update User</button>
+    </div>
+</div>

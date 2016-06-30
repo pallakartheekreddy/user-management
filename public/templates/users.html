@@ -1,0 +1,17 @@
+<h2>Users List</h2>
+<div>
+<table class="table table-bordered">
+<tr>
+<th>Employee ID</th>
+<th>Name</th>
+<th>Age</th>
+<th>Action</th>
+</tr>
+<tr ng-repeat= "user in users">
+	<td>{{user.id}}</td>
+	<td>{{user.name}}</td>
+	<td>{{user.age}}</td>
+	<td><a href="#getuserinfo/{{user.id}}">Edit</a>  <a href="#deleteuser/{{user.id}}">Delete</a></td>
+</tr>
+</table>
+</div>
