@@ -12,7 +12,7 @@ router.use(bodyParser.json())
 //Db Connection block start
 var mongodb = require('mongodb');
 // Connection URL 
-var url = 'mongodb://localhost:27017/testemp';
+var url = 'mongodb://localhost:27017/usermanagement';
 var MongoClient = mongodb.MongoClient;
 var db;
 MongoClient.connect(url, function(err, dbObj) {
@@ -28,10 +28,19 @@ MongoClient.connect(url, function(err, dbObj) {
  */
 router.post('/adduser', function(req, res) {
 
-    db.collection('users').find({"email" : req.body.email}).count(function (e, count) {       
+    db.collection('users').find({"email" : req.body.email}).count(function (e, count) {
+		console.log('count '+count);
         if(count == 0){
-            //db.collection('items').find().count(function (e, count) {   
-                db.collection('items').insert([{"id": parseInt(count+1), "name": req.body.name, "age" : parseInt(req.body.age)}], function (err, result) {
+           //db.collection('users').find().count(function (e, count) {   
+			var user = {"id": new Date().getTime(), 
+						 "name": req.body.name, 
+						 "email" : req.body.email,
+						 "age": req.body.age,
+						 "gender": req.body.gender,
+						 "dob" : req.body.dob
+						 };
+			console.log(user);
+                db.collection('users').insert([user], function (err, result) {
                     if (err) {
                         console.log(err);
                     } else {
@@ -40,7 +49,9 @@ router.post('/adduser', function(req, res) {
                     }
                 });
             //});    
-        }
+        }else{
+			res.send({ status: 'Fail', 'message': 'Email alreddy exsist' });
+		}
     });
 })
 
@@ -49,7 +60,7 @@ router.post('/adduser', function(req, res) {
  */
 router.post('/updateuser', function(req, res) {
 	
-	db.collection('items').update({"id": parseInt(req.body.id)}, {$set: {"name": req.body.name, "age" : parseInt(req.body.age)}}, function (err, numUpdated) {
+	db.collection('users').update({"id": parseInt(req.body.id)}, {$set: {"name": req.body.name, "age" : parseInt(req.body.age)}}, function (err, numUpdated) {
 		if (err) {
 			console.log(err);
 		} else if (numUpdated) {
@@ -68,7 +79,7 @@ router.post('/updateuser', function(req, res) {
  */
 router.get('/users', function(req, res) {
 	
-	db.collection('items').find().toArray(function (err, result) {
+	db.collection('users').find().toArray(function (err, result) {
 		if (err) {
 			console.log(err);
 		} else if (result) {
@@ -86,7 +97,7 @@ router.get('/users', function(req, res) {
 router.get('/getuserinfo/:id', function(req, res) {
 	var user_id = req.params.id;
 	console.log(user_id);
-	db.collection('items').findOne({id: parseInt(user_id)}, function(err, result) {
+	db.collection('users').findOne({id: parseInt(user_id)}, function(err, result) {
        
 		if (err) {
 			console.log(err);
@@ -107,7 +118,7 @@ router.delete('/deleteuser/:id', function(req, res) {
 	var user_id = req.params.id;
     console.log(user_id);
 	//_id: ObjectID(user_id)
-	db.collection('items').remove({id: parseInt(user_id)}, function(err, result) {
+	db.collection('users').remove({id: parseInt(user_id)}, function(err, result) {
 		if (err) {
 			console.log(err);
 		} else if (result) {
