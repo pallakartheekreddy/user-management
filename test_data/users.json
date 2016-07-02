@@ -1,7 +1,7 @@
 [
-	{"id":"1", "name":"kartheek", "email" : "kartheek@gmiail.com", "age":"26", "gender":"male", "dob": "27-07-1988"},
-	{"id":"2", "name":"mahesh", "email" : "mahesh@gmiail.com", "age":"27", "gender":"male", "dob": "27-06-1988"},
-	{"id":"3", "name":"snehal", "email" : "snehal@gmiail.com", "age":"28", "gender":"male", "dob": "27-05-1988"},
-	{"id":"4", "name":"sai", "email" : "sai@gmiail.com", "age":"29", "gender":"male", "dob": "27-04-1988"},
-	{"id":"5", "name":"sneha", "email" : "murali@gmiail.com", "age":"26", "gender":"female", "dob": "27-07-1988"},
+	{"id":"1", "name":"kartheek", "email" : "kartheek@gmail.com", "password": "123456",  "age":"26", "gender":"male", "dob": "27-07-1988"},
+	{"id":"2", "name":"mahesh", "email" : "mahesh@gmail.com", "password": "123456", "age":"27", "gender":"male", "dob": "27-06-1988"},
+	{"id":"3", "name":"snehal", "email" : "snehal@gmail.com", "password": "123456", "age":"28", "gender":"male", "dob": "27-05-1988"},
+	{"id":"4", "name":"sai", "email" : "sai@gmail.com", "password": "123456", "age":"29", "gender":"male", "dob": "27-04-1988"},
+	{"id":"5", "name":"sneha", "email" : "murali@gmail.com", "password": "123456", "age":"26", "gender":"female", "dob": "27-07-1988"},
 ]

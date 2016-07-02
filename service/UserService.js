@@ -35,6 +35,8 @@ router.post('/adduser', function(req, res) {
 			var user = {"id": new Date().getTime(), 
 						 "name": req.body.name, 
 						 "email" : req.body.email,
+						 "username" : req.body.username,
+						 "password" : req.body.password,
 						 "age": req.body.age,
 						 "gender": req.body.gender,
 						 "dob" : req.body.dob
@@ -59,12 +61,29 @@ router.post('/adduser', function(req, res) {
  * update user list
  */
 router.post('/updateuser', function(req, res) {
-	var user = {"name": req.body.name, 
-                 "email" : req.body.email,
-                 "age": req.body.age,
-                 "gender": req.body.gender,
-                 "dob" : req.body.dob
-                 };
+	var user = {};
+
+	if(req.body.name != ''){
+		user['name'] = req.body.name;
+	}
+	if(req.body.email != ''){
+		user['email'] = req.body.email;
+	}
+	/*if(req.body.username != ''){
+		user['username'] = req.body.username;
+	}
+	if(req.body.password != ''){
+		user['password'] = req.body.password;
+	}*/
+	if(req.body.age != ''){
+		user['age'] = req.body.age;
+	}
+	if(req.body.gender != ''){
+		user['gender'] = req.body.gender;
+	}
+	if(req.body.dob != ''){
+		user['dob'] = req.body.dob;
+	}
 	db.collection('users').update({"id": req.body.id}, {$set: user}, function (err, numUpdated) {
 		if (err) {
 			console.log(err);
@@ -123,11 +142,11 @@ router.delete('/deleteuser/:id', function(req, res) {
 	var user_id = req.params.id;
     console.log(user_id);
 	//_id: ObjectID(user_id)
-	db.collection('users').remove({id: user_id}, function(err, result) {
+	db.collection('users').remove({"id": user_id}, function(err, result) {
 		if (err) {
 			console.log(err);
 		} else if (result) {
-			console.log('Found:', result);
+			//console.log('Found:', result);
 			res.send({ status: 'SUCCESS'});
 		} else {
 			console.log('No document(s) found with defined "find" criteria!');

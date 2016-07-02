@@ -1,7 +1,16 @@
 angular.module('mean-sample',['ui.router'])
 .config(function($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise("/users");
+	$urlRouterProvider.otherwise("/login");
 	$stateProvider
+        .state('login', {
+            url: "/login",
+            templateUrl: '/templates/login.html',
+            controller: 'LoginCtrl',
+        })
+        .state('logout', {
+            url: "/logout",
+            controller: 'LogoutCtrl',
+        })
         .state('users', {
             url: "/users",
             templateUrl: "/templates/users.html",
@@ -49,6 +58,8 @@ angular.module('mean-sample',['ui.router'])
 		var data = {"name" : $scope.name,
                     "age" : $scope.age,
                     "email" : $scope.email,
+					"username" : $scope.username,
+					"password" : $scope.password,
                     "gender" : $scope.gender,
                     "dob" : $scope.dob
                     };
@@ -104,4 +115,45 @@ angular.module('mean-sample',['ui.router'])
         });
     }
     $scope.goToDeleteuser();
+})
+.controller('LoginCtrl', function($scope, $rootScope, $http, $state, $location) {
+    $scope.user = {};
+	// Make an AJAX call to check if the user is logged in
+    $http.get('/loggedin').success(function(user){
+        // Authenticated
+        if (user !== '0'){
+			$state.go('users');
+        } else {
+			$rootScope.message = 'You need to log in.';
+			// Register the login() function
+			$scope.login = function(){
+				$http.post('/login', {
+				  username: $scope.user.username,
+				  password: $scope.user.password,
+				})
+				.success(function(user){
+					// No error: authentication OK
+					$rootScope.message = 'Authentication successful!';
+					$state.go('users');
+				})
+				.error(function(){
+					// Error: authentication failed
+					$rootScope.message = 'Authentication failed.';
+					//$location.url('/login');
+					$state.go('login');
+				});
+			};
+        }
+    });
+})
+.controller('LogoutCtrl', function($scope, $rootScope, $http, $state, $stateParams) {
+    $scope.message = '';
+    // Logout function is available in any pages
+    $scope.goToLogout = function(){
+      $rootScope.message = 'Logged out.';
+      $http.post('/logout').success(function(users){
+		$state.go('login');  
+	  });
+    };
+    $scope.goToLogout();
 });

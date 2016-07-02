@@ -1,14 +1,30 @@
 {
-  "name": "usermanagement",
+  "name": "user-management",
   "version": "1.0.0",
-  "description": "usermanagement",
+  "description": "It is a sample mean stack project",
   "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.13.0",
+    "method-override": "^2.3.6",
+    "mongodb": "^2.1.18",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://pallakartheekreddy@github.com/pallakartheekreddy/user-management.git"
+  },
   "author": "kartheek",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.14.0"
-  }
+  "bugs": {
+    "url": "https://github.com/pallakartheekreddy/user-management/issues"
+  },
+  "homepage": "https://github.com/pallakartheekreddy/user-management#readme"
 }
